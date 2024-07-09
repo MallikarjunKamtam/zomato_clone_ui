@@ -2,6 +2,7 @@ import { IGetProduct } from "@/api/products";
 import Image from "next/image";
 import React from "react";
 import Rating from "./rating";
+import Button from "./button";
 
 const Product = ({
   data,
@@ -21,20 +22,21 @@ const Product = ({
         <p className="text-gray-600">{tag}</p>
         <div className="flex items-center justify-between mt-2">
           <span className="text-lg font-semibold">
-            {currency} {price.toFixed(2)}
+            {currency} {price}
           </span>
           <span className=" text-white px-2 py-1 rounded">
             <Rating rating={rating} />
           </span>
         </div>
-        <button
+        <Button
+          accent="primary"
           //   onClick={() => {
           //     onAddButtonClick(id);
           //   }}
-          className="mt-4 w-full border bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+          extraClasses="mt-4 !w-full float-right"
         >
           Add to Cart
-        </button>
+        </Button>
       </div>
     </div>
   );
