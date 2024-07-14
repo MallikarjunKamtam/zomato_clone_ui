@@ -58,7 +58,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
           {new Date(restaurant.updatedAt).toLocaleString()}
         </p>
         <div className="mt-4">
-          <Link className="" href={`/restaurants/${restaurant.id}`}>
+          <Link className="" href={`/${restaurant.id}`}>
             <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition duration-300">
               Open
             </div>
