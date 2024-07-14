@@ -14,6 +14,51 @@ export const getAllProducts = async (): Promise<{
   }
 };
 
+export const addToCart = async (data: ICartPayload) => {
+  try {
+    const res = await axios({
+      method: "post",
+      url: `${baseEndPoint}/cart`,
+      data,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const removeFromToCart = async (data: ICartPayload) => {
+  try {
+    const res = await axios({
+      method: "delete",
+      url: `${baseEndPoint}/cart`,
+      data,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCartList = async (): Promise<{
+  data: { productId: number; quantity: number }[];
+  message: string;
+}> => {
+  try {
+    const res = await axios({
+      method: "get",
+      url: `${baseEndPoint}/cart`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export interface ICartPayload {
+  id: number;
+}
+
 export interface IGetProduct {
   id: number;
   name: string;
