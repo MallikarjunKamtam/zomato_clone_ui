@@ -14,6 +14,23 @@ export const getAllProducts = async (): Promise<{
   }
 };
 
+export const getAllProductsForResturant = async (
+  id: number
+): Promise<{
+  data: IGetProduct[];
+  message: string;
+}> => {
+  try {
+    const res = await axios({
+      method: "get",
+      url: `${baseEndPoint}/restaurents/${id}/products`,
+    });
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addToCart = async (data: ICartPayload) => {
   try {
     const res = await axios({
