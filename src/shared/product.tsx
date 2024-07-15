@@ -9,20 +9,18 @@ import { addToCart, removeFromToCart } from "@/api/cart";
 const Product = ({
   data,
   addedCount,
+  onAdd,
+  onRemove,
+  isLoading,
 }: {
   data: IGetProduct;
   addedCount: number;
+  onAdd: (productId: number) => void;
+  onRemove: (productId: number) => void;
+  isLoading: boolean;
 }) => {
   const { currency, id, imageUrl, name, price, rating, restaurentId, tag } =
     data;
-
-  const add = async () => {
-    await addToCart({ productId: id, restaurantId: restaurentId });
-  };
-
-  const remove = async () => {
-    await removeFromToCart({ restaurantId: restaurentId, productId: id });
-  };
 
   return (
     <div className="w-96 border rounded shadow-lg p-4 m-4 ">
@@ -42,7 +40,7 @@ const Product = ({
           <Button
             accent="primary"
             onClick={() => {
-              add();
+              onAdd(id);
             }}
             extraClasses="mt-4 !w-full float-right"
           >
@@ -53,7 +51,7 @@ const Product = ({
             <Button
               accent="primary"
               onClick={() => {
-                add();
+                onAdd(id);
               }}
               extraClasses="mt-4 w-full"
             >
@@ -65,7 +63,7 @@ const Product = ({
             <Button
               accent="primary"
               onClick={() => {
-                remove();
+                onRemove(id);
               }}
               extraClasses="mt-4 w-full"
             >
