@@ -51,23 +51,24 @@ const Product = ({
             <Button
               accent="primary"
               onClick={() => {
-                onAdd(id);
-              }}
-              extraClasses="mt-4 w-full"
-            >
-              +
-            </Button>
-            <span className="w-full text-3xl items-center justify-center flex mt-3">
-              {addedCount}
-            </span>
-            <Button
-              accent="primary"
-              onClick={() => {
                 onRemove(id);
               }}
               extraClasses="mt-4 w-full"
             >
               -
+            </Button>
+            <span className="w-full text-3xl items-center justify-center flex mt-3">
+              {addedCount}
+            </span>
+
+            <Button
+              accent="primary"
+              onClick={() => {
+                onAdd(id);
+              }}
+              extraClasses="mt-4 w-full"
+            >
+              +
             </Button>
           </div>
         )}
