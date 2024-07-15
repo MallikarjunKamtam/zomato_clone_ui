@@ -1,8 +1,10 @@
+"use client";
 import { IGetProduct } from "@/api/products";
 import Image from "next/image";
 import React from "react";
 import Rating from "./rating";
 import Button from "./button";
+import { addToCart } from "@/api/cart";
 
 const Product = ({
   data,
@@ -30,9 +32,9 @@ const Product = ({
         </div>
         <Button
           accent="primary"
-          //   onClick={() => {
-          //     onAddButtonClick(id);
-          //   }}
+          onClick={async () => {
+            await addToCart({ productId: id });
+          }}
           extraClasses="mt-4 !w-full float-right"
         >
           Add to Cart
