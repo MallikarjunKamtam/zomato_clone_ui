@@ -1,32 +1,48 @@
-import { IGetRestautant } from "@/api/restaurants";
+import { IGetRestaurant } from "@/api/restaurants";
 import Link from "next/link";
 
 interface RestaurantCardProps {
-  restaurant: IGetRestautant;
+  restaurant: IGetRestaurant;
 }
 
 const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl">
-      <img
-        className="w-full h-48 object-cover"
-        src="https://via.placeholder.com/400x300"
-        alt={restaurant.name}
-      />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 text-gray-900">
-          {restaurant.name}
+    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-101 hover:shadow-2xl">
+      <div className="relative">
+        <img
+          className="w-full h-56 object-cover"
+          src={restaurant.imageUrl}
+          alt={restaurant.name}
+        />
+        {restaurant.cartCount > 0 && (
+          <div className="absolute bottom right-0 bg-[gold]   text-[darkblue] p-2 rounded-bl-lg">
+            <span className="text-xs font-semibold uppercase">
+              {restaurant.cartCount}
+            </span>
+          </div>
+        )}
+        <div
+          className={`absolute top-0 right-0 m-2 text-xs font-semibold uppercase px-2 py-1 rounded ${
+            restaurant.isOpen ? "bg-green-500" : "bg-red-500"
+          } text-white`}
+        >
+          {restaurant.isOpen ? "Open" : "Closed"}
         </div>
-        <p className="text-gray-700 text-base mb-2">
+      </div>
+      <div className="px-6 py-4">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          {restaurant.name}
+        </h2>
+        <p className="text-gray-600 text-base mb-2">
           <strong>Owner:</strong> {restaurant.ownerName}
         </p>
-        <p className="text-gray-700 text-base mb-2">
+        <p className="text-gray-600 text-base mb-2">
           <strong>Location:</strong> {restaurant.location}
         </p>
-        <p className="text-gray-700 text-base mb-2">
+        <p className="text-gray-600 text-base mb-2">
           <strong>Phone:</strong> {restaurant.phoneNumber}
         </p>
-        <p className="text-gray-700 text-base mb-2">
+        <p className="text-gray-600 text-base mb-2">
           <strong>Email:</strong>{" "}
           <a
             href={`mailto:${restaurant.email}`}
@@ -35,33 +51,19 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
             {restaurant.email}
           </a>
         </p>
-        <p className="text-gray-700 text-base mb-2">
+        <p className="text-gray-600 text-base mb-2">
           <strong>Timings:</strong> {restaurant.timingsOpen} -{" "}
           {restaurant.timingsClose}
         </p>
-        <p className="text-gray-700 text-base mb-2">
+        <p className="text-gray-600 text-base mb-2">
           <strong>Rating:</strong> {restaurant.rating}
         </p>
-        <p
-          className={`text-base font-semibold mb-2 ${
-            restaurant.isOpen ? "text-green-500" : "text-red-500"
-          }`}
-        >
-          <strong>Status:</strong> {restaurant.isOpen ? "Open" : "Closed"}
-        </p>
-        <p className="text-gray-500 text-sm">
-          <strong>Created At:</strong>{" "}
-          {new Date(restaurant.createdAt).toLocaleString()}
-        </p>
-        <p className="text-gray-500 text-sm">
-          <strong>Updated At:</strong>{" "}
-          {new Date(restaurant.updatedAt).toLocaleString()}
-        </p>
+
         <div className="mt-4">
-          <Link className="" href={`/${restaurant.id}`}>
-            <div className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition duration-300">
-              Open
-            </div>
+          <Link href={`/${restaurant.id}`}>
+            <span className="inline-block bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 transition duration-300">
+              View Details
+            </span>
           </Link>
         </div>
       </div>

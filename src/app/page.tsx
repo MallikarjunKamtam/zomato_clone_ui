@@ -14,11 +14,7 @@ export default async function () {
     return (
       <main className="grid grid-cols-3 items-center justify-center gap-10 p-4">
         {response.data.map((restaurant, index) => (
-          <RestaurantCard
-            key={restaurant.id + index}
-            restaurant={restaurant}
-            // onAddButtonClick={(id) => {}}
-          />
+          <RestaurantCard key={restaurant.id + index} restaurant={restaurant} />
         ))}
       </main>
     );

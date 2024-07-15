@@ -3,7 +3,7 @@ import axios from "axios";
 const baseEndPoint = process.env.NEXT_PUBLIC_ZOMATO_CLONE_SERVICE;
 
 export const getAllRestaurants = async (): Promise<{
-  data: IGetRestautant[];
+  data: IGetRestaurant[];
   message: string;
 }> => {
   try {
@@ -17,12 +17,12 @@ export const getAllRestaurants = async (): Promise<{
   }
 };
 
-export interface IGetRestautant {
+export interface IGetRestaurant {
   id: number;
   name: string;
   isOpen: boolean;
   location: string;
-  phoneNumber: number;
+  phoneNumber: string;
   email: string;
   timingsOpen: string;
   timingsClose: string;
@@ -30,4 +30,6 @@ export interface IGetRestautant {
   rating: string;
   createdAt: string;
   updatedAt: string;
+  cartCount: number;
+  imageUrl: string;
 }
