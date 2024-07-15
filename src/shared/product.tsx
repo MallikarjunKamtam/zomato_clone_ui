@@ -4,17 +4,25 @@ import Image from "next/image";
 import React from "react";
 import Rating from "./rating";
 import Button from "./button";
-import { addToCart } from "@/api/cart";
+import { addToCart, removeFromToCart } from "@/api/cart";
 
 const Product = ({
   data,
-}: //   onAddButtonClick,
-{
+  addedCount,
+}: {
   data: IGetProduct;
-  //   onAddButtonClick: (id: number) => void;
+  addedCount: number;
 }) => {
   const { currency, id, imageUrl, name, price, rating, restaurentId, tag } =
     data;
+
+  const add = async () => {
+    await addToCart({ productId: id, restaurantId: restaurentId });
+  };
+
+  const remove = async () => {
+    await removeFromToCart({ restaurantId: restaurentId, productId: id });
+  };
 
   return (
     <div className="w-96 border rounded shadow-lg p-4 m-4 ">
@@ -30,15 +38,41 @@ const Product = ({
             <Rating rating={rating} />
           </span>
         </div>
-        <Button
-          accent="primary"
-          onClick={async () => {
-            await addToCart({ productId: id });
-          }}
-          extraClasses="mt-4 !w-full float-right"
-        >
-          Add to Cart
-        </Button>
+        {addedCount === 0 ? (
+          <Button
+            accent="primary"
+            onClick={() => {
+              add();
+            }}
+            extraClasses="mt-4 !w-full float-right"
+          >
+            Add to Cart
+          </Button>
+        ) : (
+          <div className=" flex items-center justify-around w-1/2 m-auto">
+            <Button
+              accent="primary"
+              onClick={() => {
+                add();
+              }}
+              extraClasses="mt-4 w-full"
+            >
+              +
+            </Button>
+            <span className="w-full text-3xl items-center justify-center flex mt-3">
+              {addedCount}
+            </span>
+            <Button
+              accent="primary"
+              onClick={() => {
+                remove();
+              }}
+              extraClasses="mt-4 w-full"
+            >
+              -
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

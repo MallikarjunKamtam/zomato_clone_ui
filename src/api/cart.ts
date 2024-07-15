@@ -29,14 +29,16 @@ export const removeFromToCart = async (data: ICartPayload) => {
   }
 };
 
-export const getCartList = async (): Promise<{
-  data: { productId: number; quantity: number }[];
+export const getCartList = async (
+  restaurantId: number
+): Promise<{
+  data: { [productId: string]: number };
   message: string;
 }> => {
   try {
     const res = await axios({
       method: "get",
-      url: `${baseEndPoint}/cart`,
+      url: `${baseEndPoint}/cart/${restaurantId}`,
     });
     return res.data;
   } catch (error) {
@@ -46,4 +48,5 @@ export const getCartList = async (): Promise<{
 
 export interface ICartPayload {
   productId: number;
+  restaurantId: number;
 }
