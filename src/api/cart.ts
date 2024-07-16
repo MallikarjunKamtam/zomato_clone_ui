@@ -16,6 +16,19 @@ export const addToCart = async (data: ICartPayload) => {
   }
 };
 
+export const resetCart = async () => {
+  try {
+    const res = await axios({
+      method: "post",
+      url: `${baseEndPoint}/cart/reset-cart`,
+    });
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const removeFromToCart = async (data: ICartPayload) => {
   try {
     const res = await axios({

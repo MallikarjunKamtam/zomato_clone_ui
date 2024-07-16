@@ -1,4 +1,5 @@
 "use client";
+import { resetCart } from "@/api/cart";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
@@ -22,8 +23,6 @@ const CheckoutComponent = ({ children }: props) => {
         url: stripeEndPoint,
         headers: { "Content-Type": "application/json" },
       });
-
-      console.log(session, "sessionsessionsession");
 
       if (!session) throw new Error("Something went wrong");
 
