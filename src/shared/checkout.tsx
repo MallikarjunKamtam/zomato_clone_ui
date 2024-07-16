@@ -1,11 +1,12 @@
 "use client";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+
 type props = {
-  priceId: string;
   children: any;
 };
-const CheckoutComponent = ({ priceId, children }: props) => {
+const CheckoutComponent = ({ children }: props) => {
+  const stripeEndPoint = `${process.env.NEXT_PUBLIC_ZOMATO_CLONE_SERVICE}/stripe/create-checkout-session`;
   const makePayment = async function () {
     const stripe = await loadStripe(
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -16,13 +17,18 @@ const CheckoutComponent = ({ priceId, children }: props) => {
     }
 
     try {
-      const response = await axios.post("/api/stripe/checkout", {
-        priceId: priceId,
+      const session = await axios({
+        method: "post",
+        url: stripeEndPoint,
+        headers: { "Content-Type": "application/json" },
       });
-      const data = response.data;
-      if (!data.ok) throw new Error("Something went wrong");
+
+      console.log(session, "sessionsessionsession");
+
+      if (!session) throw new Error("Something went wrong");
+
       await stripe.redirectToCheckout({
-        sessionId: data.result.id,
+        sessionId: session.data.data.id,
       });
     } catch (error) {
       console.log(error);
