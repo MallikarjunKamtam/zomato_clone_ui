@@ -1,5 +1,7 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 const baseEndPoint = process.env.NEXT_PUBLIC_ZOMATO_CLONE_SERVICE;
 
 export const addToCart = async (data: ICartPayload) => {

@@ -1,12 +1,17 @@
+"use client";
+
 import { getAllRestaurants } from "@/api/restaurants";
 import NavBarHome from "@/shared/navBar";
-
+import { useQuery } from "@tanstack/react-query";
 import RestaurantCard from "@/shared/restaurant";
 
 import React from "react";
 
-export default async function () {
-  const response = await getAllRestaurants();
+export default function () {
+  const { data } = useQuery({
+    queryFn: getAllRestaurants,
+    queryKey: ["getAllRestaurants"],
+  });
 
   const emptyPlaceHolder = () => {
     return <>Empty</>;
@@ -17,7 +22,7 @@ export default async function () {
       <section>
         <NavBarHome />
         <main className="grid grid-cols-3 items-center justify-center gap-10 p-4">
-          {response.data.map((restaurant, index) => (
+          {data.data.map((restaurant, index) => (
             <RestaurantCard
               key={restaurant.id + index}
               restaurant={restaurant}
@@ -28,5 +33,5 @@ export default async function () {
     );
   };
 
-  return response.data.length === 0 ? emptyPlaceHolder() : content();
+  return data?.data?.length > 0 ? content() : emptyPlaceHolder();
 }

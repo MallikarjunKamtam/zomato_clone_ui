@@ -10,6 +10,7 @@ export const getAllRestaurants = async (): Promise<{
     const res = await axios({
       method: "get",
       url: `${baseEndPoint}/restaurents`,
+      withCredentials: true,
     });
     return res.data;
   } catch (error) {
