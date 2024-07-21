@@ -1,6 +1,4 @@
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
+import { axios } from "@/lib/interceptor";
 
 const baseEndPoint = process.env.NEXT_PUBLIC_ZOMATO_CLONE_SERVICE;
 
