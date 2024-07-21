@@ -38,3 +38,6 @@ next-env.d.ts
 .env
 
 public/swEnv.js
+
+service-key.json
+certificates
