@@ -1,13 +1,16 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
 import { getAllRestaurants } from "@/api/restaurants";
 import NavBarHome from "@/shared/navBar";
 import { useQuery } from "@tanstack/react-query";
 import RestaurantCard from "@/shared/restaurant";
-
+import FcmTokenComp from "../lib/firebaseForeground";
 import React from "react";
+import dotenv from "dotenv";
 
 export default function () {
+  dotenv.config();
   const { data } = useQuery({
     queryFn: getAllRestaurants,
     queryKey: ["getAllRestaurants"],
@@ -21,12 +24,10 @@ export default function () {
     return (
       <section>
         <NavBarHome />
+        <FcmTokenComp />
         <main className="grid grid-cols-3 items-center justify-center gap-10 p-4">
           {data.data.map((restaurant, index) => (
-            <RestaurantCard
-              key={restaurant.id + index}
-              restaurant={restaurant}
-            />
+            <RestaurantCard key={"key" + index} restaurant={restaurant} />
           ))}
         </main>
       </section>

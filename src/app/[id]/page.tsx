@@ -60,7 +60,7 @@ export default function ({ params: { id } }: { params: { id: string } }) {
                 addToCartAsync.mutateAsync(id);
               }}
               addedCount={cartDetails?.data?.data[product.id] ?? 0}
-              key={product.id + index}
+              key={"key" + index}
               data={product}
             />
           ))}

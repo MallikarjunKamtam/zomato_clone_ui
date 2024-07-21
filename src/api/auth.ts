@@ -14,10 +14,8 @@ export async function signIn(
     );
 
     if (response.status === 200) {
-      console.log("Sign in successful");
       return true;
     } else {
-      console.error("Sign in failed");
     }
   } catch (error) {
     console.error("Error signing in:", error);

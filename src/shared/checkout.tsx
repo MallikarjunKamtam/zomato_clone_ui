@@ -30,7 +30,7 @@ const CheckoutComponent = ({ children }: props) => {
         sessionId: session.data.data.id,
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return <div onClick={makePayment}>{children}</div>;
