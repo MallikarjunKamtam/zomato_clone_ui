@@ -26,7 +26,6 @@ export default function () {
         <NavBarHome />
         <FcmTokenComp />
         <main className="grid grid-cols-3 items-center justify-center gap-10 p-4">
-          jhavfdsfjs
           {data.data.map((restaurant, index) => (
             <RestaurantCard key={"key" + index} restaurant={restaurant} />
           ))}
